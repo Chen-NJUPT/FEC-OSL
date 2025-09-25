@@ -914,7 +914,7 @@ def test(model, nb_classes, use_gpu, device, dataset_name,
             print(f'Test ami_score: {ami_score:.4f}')
                           
 def main():
-    nb_classes = get_classes("dataset/pcap/USTC-TFC2016_PCAP") | 20
+    nb_classes = 20
     ratio = 0.8  
     new_classes = math.ceil((nb_classes - int(nb_classes * ratio)) / 2)
 
