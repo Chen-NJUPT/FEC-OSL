@@ -261,6 +261,9 @@ def get_flow_dataset(dataset_flow_path, all_classes, known_classes):
 def save_dataloader_to_h5(data_loader, h5_filename):
     if os.path.exists(h5_filename):
         return
+    base_dir = os.path.join("dataset", "dataloader")
+    if not os.path.exists(base_dir):
+        os.makedirs(base_dir)
     with h5py.File(h5_filename, 'w') as h5f:
         dataset_size = len(data_loader.dataset)
         batch_size = data_loader.batch_size
@@ -915,7 +918,7 @@ def test(model, nb_classes, use_gpu, device, dataset_name,
                           
 def main():
     nb_classes = 20
-    ratio = 0.8  
+    ratio = 0.8
     new_classes = math.ceil((nb_classes - int(nb_classes * ratio)) / 2)
 
     
