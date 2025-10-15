@@ -218,30 +218,30 @@ class FlowFeatureExtractor(nn.Module):
     
     def forward(self, g):
         all_info_matrix = g.ndata['all_info'].float()
-        fgnet_matrix = self.fs_fextractor(all_info_matrix)    
+        flow_matrix = self.fs_fextractor(all_info_matrix)    
         
         for layer in self.layers:
             
-            fgnet_matrix = layer(g, fgnet_matrix.to(torch.device(self.device))) 
+            flow_matrix = layer(g, flow_matrix.to(torch.device(self.device))) 
             if self.layer_type =='GAT':
-                fgnet_matrix = torch.flatten(fgnet_matrix,1)   
-        g.ndata['fgnet'] = fgnet_matrix   
-        fgnet_matrix = dgl.mean_nodes(g,'fgnet')
+                flow_matrix = torch.flatten(flow_matrix,1)   
+        g.ndata['flow'] = flow_matrix   
+        flow_matrix = dgl.mean_nodes(g,'flow')
         
-        return  fgnet_matrix       
+        return  flow_matrix       
     
     def forward_classify(self, g):
         all_info_matrix = g.ndata['all_info'].float()
-        fgnet_matrix = self.fs_fextractor(all_info_matrix)    
+        flow_matrix = self.fs_fextractor(all_info_matrix)    
         
         for layer in self.layers:
             
-            fgnet_matrix = layer(g, fgnet_matrix.to(torch.device(self.device))) 
+            flow_matrix = layer(g, flow_matrix.to(torch.device(self.device))) 
             if self.layer_type =='GAT':
-                fgnet_matrix = torch.flatten(fgnet_matrix,1)   
-        g.ndata['fgnet'] = fgnet_matrix   
-        fgnet_matrix = dgl.mean_nodes(g,'fgnet')
-        return  self.classify(fgnet_matrix)       
+                flow_matrix = torch.flatten(flow_matrix,1)   
+        g.ndata['flow'] = flow_matrix   
+        flow_matrix = dgl.mean_nodes(g,'flow')
+        return  self.classify(flow_matrix)       
         
 class HeaderPatchEmbed(nn.Module):
     def __init__(self, img_size=40, patch_size=2, in_chans=1, embed_dim=96):
