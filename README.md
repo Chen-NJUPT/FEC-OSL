@@ -1,4 +1,4 @@
-# FEC_OSL
+# FEC-OSL
 
 ## Introduction
 
