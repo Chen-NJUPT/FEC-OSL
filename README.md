@@ -7,12 +7,7 @@ This research presents an end-to-end open-set semi-supervised learning framework
 ## Requirements
 
 ```bash
-pip install scipy
-pip install numpy
-pip install pandas
-pip install matplotlib
-pip install sklearn
-pip install torch
+
 ```
 
 ## Model Architecture
